@@ -8,9 +8,15 @@ export default function useGame() {
     const gameQuery = useGameQueryStore();
     return useQuery<Game[], Error>({
         queryKey: ['games', gameQuery],
-        queryFn: () => apiClient.get<FetchDataResponse<Game>>("/games",
-            {params:{genres: gameQuery.genre, parent_platforms:gameQuery.platform?.id,
-          ordering: gameQuery.ordering?.value, search: gameQuery.search}}).then(res => res.data.results),
+        queryFn: () => apiClient.get<FetchDataResponse<Game>>("/games", {
+            params: {
+                genres: gameQuery.genre,
+                parent_platforms: gameQuery.platform?.id,
+                ordering: gameQuery.ordering?.value,
+                search: gameQuery.search
+            }
+        }).then(res => res.data.results),
         staleTime: 3600 * 1000 * 24
     })
 }
+

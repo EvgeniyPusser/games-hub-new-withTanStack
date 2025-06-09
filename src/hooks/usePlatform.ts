@@ -1,12 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import ParentPlatform from "../model/ParentPlatform";
-import apiClient from "../services/api-client";
-import FetchDataResponse from "../model/fetch-data-response";
+import Platform from "../model/ParentPlatform";
+import useData from "./useData";
 
-export default function usePlatform() {
-     return useQuery<ParentPlatform[], Error>({
-        queryKey: ['platform'],
-        queryFn: () => apiClient.get<FetchDataResponse<ParentPlatform>>("/platforms/lists/parents").then(res => res.data.results),
-        staleTime: 3600 * 1000 * 24
-    })
+export default function usePlatforms() {
+  return useData<Platform>("/platforms/lists/parents");
 }
