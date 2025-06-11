@@ -6,10 +6,10 @@ import { AxiosRequestConfig } from "axios";
 export default function useData<T>(
   endpoint: string,
   config?: AxiosRequestConfig,
-  deps: unknown[] = []
+  //deps: unknown[] = []
 ) {
   return useQuery<T[], Error>({
-    queryKey: [endpoint, config?.params, ...deps],
+    queryKey: [endpoint, config?.params],
     queryFn: () =>
       apiClient
         .get<FetchDataResponse<T>>(endpoint, config)
